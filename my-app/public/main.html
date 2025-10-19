@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="icon" href="/logo.svg" />
+ 
+       
+
+    <title>Document</title>
+</head>
+
+<body class="roboto-condensed">
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid d-flex justify-content-between align-items-center" style="margin-bottom: 0%;">
+            <a class="navbar-brand" href="#">
+                <h1 style="color: #39FF14;display: inline;">Versa</h1>
+                <h1 style="color: #00FFFF;display: inline;">Life</h1>
+            </a>
+        </div>
+    </nav>
+
+    <div style="margin: 0%; padding: 0%;">
+        <img src="logo.svg" alt="VersaLife Logo" style="width: 200px; height: 100px; display: block; margin: 0 auto;">
+    </div>
+
+    <button onclick="goBackToProfile()" class="back-button">← Back to Medical Records</button>
+
+    <div class="table-container">
+        <table class="tablestyle">
+            <tr>
+                <td colspan="3" class="border_bottom"><img src="" alt="profile.jpg"
+                        onerror="this.onerror=null; this.src='download.png';" id="profile"></td>
+                <input type="file" style="display: none;" id="image">
+            </tr>
+
+            <tr>
+                <td>First Name: <p class="dbclick">Edit here</p>
+                    <img src="pen.svg" alt=""
+                        style="width: 18px !important; height: 18px !important; border: none !important; padding: 0 !important;">
+                </td>
+                <td>Last Name: <p class="dbclick">Edit here</p>
+                    <img src="pen.svg" alt=""
+                        style="width: 18px !important; height: 18px !important; border: none !important; padding: 0 !important;">
+                </td>
+            </tr>
+
+            <tr>
+                <td>Ethnicity:
+                    <p class="dbclick">Edit here</p><img src="pen.svg" alt=""
+                        style="width: 18px !important; height: 18px !important; border: none !important; padding: 0 !important;">
+                </td>
+                <td>Email: <p class="dbclick">Edit here</p>
+                    <img src="pen.svg" alt=""
+                        style="width: 18px !important; height: 18px !important; border: none !important; padding: 0 !important;">
+                </td>
+                <td>Phone Number:<p class="dbclick">Edit here</p>
+                    <img src="pen.svg" alt=""
+                        style="width: 18px !important; height: 18px !important; border: none !important; padding: 0 !important;">
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="table-container" style="margin-bottom: 20px;">
+        <table class="tablestyle smalltable" style="margin-right: 4px;">
+            <tr class="border_bottom">
+                <td>Allergies <img src="documentedit.svg" alt=""
+                        style="width: 30px !important; height: 30px !important; border: none !important; padding: 0 !important;">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+
+        <table class="tablestyle smalltable " style="margin-left: 4px;">
+            <tr class="border_bottom">
+                <td>Medication <img src="documentedit.svg" alt=""
+                        style="width: 30px !important; height: 30px !important; border: none !important; padding: 0 !important;">
+                </td>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+
+        <table class="tablestyle smalltable " style="margin-left: 4px;">
+            <tr class="border_bottom">
+                <td>Diagnosis <img src="documentedit.svg" alt=""
+                        style="width: 30px !important; height: 30px !important; border: none !important; padding: 0 !important;">
+                </td>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+
+    </div>
+
+   
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const patientId = params.get('id'); // Get the patient ID passed from PatientProfile
+
+        // --- MODIFIED: Functionality to go back to the correct React profile page ---
+        function goBackToProfile() {
+            if (patientId) {
+                // Navigate back using the ID. Assumes BrowserRouter (no #).
+                window.location.href = `/profile/${patientId}`;
+            } else {
+                // Fallback if ID is missing
+                alert("Cannot determine which profile to return to.");
+                // window.location.href = '/'; // Optional: redirect to search page
+            }
+        }
+        // --- END MODIFICATION ---
+
+        // Optional: Use patientId to customize this static page if needed
+        if (patientId) {
+            console.log("Displaying main profile details for patient ID:", patientId);
+            // Example: Fetch specific details for this patient and populate the table
+            // fetch(`/api/patient-main-details/${patientId}`).then(...).then(data => { /* update DOM */ });
+        }
+
+    </script>
+
+    <script src="/tables.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="roboto-condensed">
+
+
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="#">
+
+                <h1 style="color: #39FF14;display: inline;">Versa</h1>
+                <h1 style="color: #00FFFF;display: inline;">Life</h1>
+            </a>
+            <form class="d-flex">
+                <a href="signin.html"><button class="btn btn-outline-success me-2" type="button" style="margin-left: 1200px;">Sign in</button></a>
+                <a href="signup.html"><button type="button" class="btn btn-primary" style="margin-left: 5px;">Sign up</button></a>
+            </form>
+        </div>
+    </nav>
+    <div style="margin: 0%;padding: 0%;">
+
+        <img src="logo.svg" alt="VersaLife Logo" style="width: 200px; height: 200px; display: block; margin: 0 auto;">
+    </div>
+
+    <!-- Bootstrap JS -->
+<script src="bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+
+<section class="aboutus">
+    <h1>About Us</h1>
+    <p>
+        At <strong>VersaLife</strong>, we are dedicated to transforming the way medical information is accessed and
+        shared.
+        Our platform provides individuals with a secure, digital Medical ID—ensuring that vital health details are
+        always
+        accessible when they matter most.
+    </p>
+
+    <hr>
+
+    <h2>Our Mission</h2>
+    <p>
+        Our mission is to <strong>connect individuals with emergency responders</strong> through a fast, reliable, and
+        intuitive solution
+        for storing and accessing critical medical data. From <strong>allergies and blood types</strong> to
+        <strong>chronic conditions
+            and emergency contacts</strong>, VersaLife ensures that healthcare professionals have immediate access to
+        the information
+        they need to deliver effective care—when every second counts.
+    </p>
+
+    <hr>
+
+    <h2>Key Features</h2>
+    <ul>
+        <li><strong>Secure Medical ID Profiles</strong> – Users can safely store essential health records with advanced
+            data protection.</li>
+        <li><strong>Emergency Access</strong> – First responders can quickly retrieve life-saving medical details in
+            urgent scenarios.</li>
+        <li><strong>Admin Role Application</strong> – Trusted users may apply for admin access to assist with system
+            management and data verification.</li>
+        <li><strong>User-Friendly Interface</strong> – Designed with simplicity and accessibility in mind, making it
+            easy for anyone to use.</li>
+    </ul>
+
+    <hr>
+
+    <h2>Why It Matters</h2>
+    <p>
+        Medical emergencies are unpredictable—and in those critical moments, having access to accurate, real-time
+        medical information
+        can make all the difference. VersaLife <strong>empowers individuals</strong> to take control of their health
+        data while
+        equipping healthcare providers with the tools they need to deliver <strong>faster, smarter, and more informed
+            care</strong>.
+    </p>
+
+    <hr>
+
+    <h2>Join Us</h2>
+    <p>
+        Be part of a movement that’s making healthcare <strong>more efficient, accessible, and potentially
+            life-saving</strong>—one
+        Medical ID at a time.
+    </p>
+
+    <div class="footer">
+        <a href="https://www.instagram.com/"><img src="Instagram_icon.png" alt="Instagram" /></a>
+        <a href="https://www.facebook.com/"><img src="Facebook_logo_(square).png.webp" alt="Facebook" /></a>
+        <a href="https://www.twitter.com/"><img src="X_logo.jpg" alt="Twitter" /></a>
+    </div>
+</section>
+
+        <button id="backToTop" onclick="scrollToTop()"><div class="arrow-icon">
+            <div class="arrow up"></div>
+        </div>
+</button>  
+<!-- Add this at the bottom of your HTML body -->
+<footer class="sponsors-footer">
+    <div class="sponsor-track">
+        <div class="sponsor-slide">
+            <!-- Repeating content -->
+            <span>Sponsor</span>
+            <span>Sponsor</span>
+            <span>Sponsor</span>
+            <span>Sponsor</span>
+            <!-- Duplicate for seamless scrolling -->
+            <span>Sponsor</span>
+            <span>Sponsor</span>
+            <span>Sponsor</span>
+            <span>Sponsor</span>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .sponsors-footer {
+        background-color: #f8f9fa;
+        padding: 10px 0;
+        border-top: 2px solid #00FFFF;
+        border-radius: 10px 10px 0 0;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        overflow: hidden;
+        box-shadow: 0 -2px 10px rgba(0, 255, 255, 0.2);
+    }
+
+    .sponsor-track {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .sponsor-slide {
+        display: inline-flex;
+        gap: 60px;
+        white-space: nowrap;
+        animation: scrollLoop 20s linear infinite;
+    }
+
+    .sponsor-slide span {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: black;
+        padding: 8px 16px;
+    }
+
+    /* Infinite loop animation */
+    @keyframes scrollLoop {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+</style>
+
+
+
+        
+        <script>
+        
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+
+              window.addEventListener('scroll', function () {
+                    const backToTopButton = document.getElementById('backToTop');
+                    if (window.scrollY > 100) { 
+                        backToTopButton.style.display = 'block';
+                    } else {
+                        backToTopButton.style.display = 'none';
+                    }
+                });
+            </script>
+
+        </script>
+
+    </section>
+    </div>
+
+
+       
+    
+    
+
+
+</html>

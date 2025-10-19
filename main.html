@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Document</title>
+</head>
+
+<body class="roboto-condensed">
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid d-flex justify-content-between align-items-center" style="margin-bottom: 0%;">
+            <a class="navbar-brand" href="#">
+                <h1 style="color: #39FF14;display: inline;">Versa</h1>
+                <h1 style="color: #00FFFF;display: inline;">Life</h1>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Move the logo outside the navbar -->
+    <div style="margin: 0%; padding: 0%;">
+        <img src="logo.svg" alt="VersaLife Logo" style="width: 200px; height: 100px; display: block; margin: 0 auto;">
+    </div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        function goToReactProfile() {
+            if (id) {
+                window.location.href = `my-app\src\PatientProfile.js`;
+            } else {
+                window.location.href = '/'; // Fallback if no ID
+            }
+        }
+    </script>
+    
+    <button class="profile-button" onclick="goToReactProfile()">
+        Go to tests
+    </button>
+
+
+
+
+    </div>
+    <div class="table-container">
+        <table class="tablestyle">
+            <tr>
+                <td colspan="3" class="border_bottom"><img src="" alt="profile.jpg"
+                        onerror="this.onerror=null; this.src='download.png';" id="profile"></td>
+                <input type="file" style="display: none;" id="image">
+            </tr>
+
+            <tr>
+                <td>First Name: <p class="dbclick">Edit here</p>
+                    <img src="pen.svg" alt=""
+                        style="width: 18px !important; height: 18px !important; border: none !important; padding: 0 !important;">
+                </td>
+                <td>Last Name: <p class="dbclick">Edit here</p>
+                    <img src="pen.svg" alt=""
+                        style="width: 18px !important; height: 18px !important; border: none !important; padding: 0 !important;">
+                </td>
+                <td>Age: <p class="dbclick">Edit here</p>
+                    <img src="pen.svg" alt=""
+                        style="width: 18px !important; height: 18px !important; border: none !important; padding: 0 !important;">
+                </td>
+            </tr>
+
+            <tr>
+                <td>Ethnicity:
+                    <p class="dbclick">Edit here</p><img src="pen.svg" alt=""
+                        style="width: 18px !important; height: 18px !important; border: none !important; padding: 0 !important;">
+                </td>
+                <td>Email: <p class="dbclick">Edit here</p>
+                    <img src="pen.svg" alt=""
+                        style="width: 18px !important; height: 18px !important; border: none !important; padding: 0 !important;">
+                </td>
+                <td>Phone Number:<p class="dbclick">Edit here</p>
+                    <img src="pen.svg" alt=""
+                        style="width: 18px !important; height: 18px !important; border: none !important; padding: 0 !important;">
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="table-container" style="margin-bottom: 100px;">
+        <table class="tablestyle smalltable" style="margin-right: 4px;">
+            <tr class="border_bottom">
+                <td>Allergies <img src="documentedit.svg" alt=""
+                    style="width: 30px !important; height: 30px !important; border: none !important; padding: 0 !important;"></td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+
+        <table class="tablestyle smalltable " style="margin-left: 4px;">
+            <tr class="border_bottom">
+                <td>Medication <img src="documentedit.svg" alt=""
+                    style="width: 30px !important; height: 30px !important; border: none !important; padding: 0 !important;"></td></td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+
+    </div>
+
+    <script src="tables.js" defer></script>
+</body>
+
+</html>

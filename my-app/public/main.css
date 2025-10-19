@@ -1,0 +1,218 @@
+body {
+    min-height: 100vh;
+    background-color: #121212;
+    color: whitesmoke;
+    background: linear-gradient(180deg, #000000, #002B36) no-repeat;
+    font-family: "Roboto Condensed", sans-serif;
+    display: block;
+    padding-top: 120px;
+    margin: 0 !important;
+    /* This ensures content starts below the fixed navbar */
+}
+
+.navbar {
+    background-color: #003B46 !important;
+    opacity: 0.95;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-bottom: 3px solid #00FFFF;
+    box-shadow: 0px 5px 15px rgba(0, 255, 255, 0.3);
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.bg-body-tertiary {
+    background-color: #003B46 !important;
+}
+
+.container-fluid {
+    padding: 0 20px !important;
+    width: 100% !important;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.navbar-brand {
+    color: white !important;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-decoration: none !important;
+}
+
+.navbar:hover {
+    box-shadow: 0px 7px 20px rgba(0, 0, 0, 0.8);
+}
+
+.container {
+    margin-top: 20px;
+
+}
+
+
+.roboto-condensed {
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+
+}
+
+
+.tablestyle {
+    border: 2px solid #00FFFF !important;
+    border-radius: 10px !important;
+    background-color: #002B36 !important;
+    box-shadow: 0px 5px 15px rgba(0, 255, 255, 0.3) !important;
+    padding: 20px !important;
+    width: 50% !important;
+    border-collapse: separate !important;
+    border-spacing: 30px 15px !important;
+}
+
+
+
+.table-container {
+    display: flex !important;
+    justify-content:center!important;
+    margin-top: 20px !important;
+}
+
+img {
+    padding: 50px;
+}
+
+.tablestyle td {
+    padding: 10px !important;
+    color: white !important;
+    text-align: left !important;
+    width: 33.33% !important;
+
+}
+
+.tablestyle tr {
+    border: #000000;
+    border-width: 1px;
+}
+
+.tablestyle tr:first-child td {
+    text-align: center !important;
+    padding-bottom: 30px !important;
+}
+
+
+.tablestyle img {
+    width: 150px !important;
+    height: 150px !important;
+    border-radius: 50% !important;
+    border: 2px solid #00FFFF !important;
+}
+
+
+.smalltable {
+    width: 25% !important;
+    max-height: 30px !important;
+    overflow-y: auto !important;
+    margin-bottom: 15px;
+    
+}
+
+tr.border_bottom td {
+    border-bottom: 1px solid white;
+
+}
+
+.dbclick{
+    display: inline;
+    color:#39FF14 ;
+    
+
+
+}
+
+@media (max-width: 1100px) {
+    .container {
+        width: min(600px, 100%) !important;
+    }
+}
+
+
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #002B36;
+    border-radius: 10px;
+
+}
+
+::-webkit-scrollbar-thumb {
+    background: #29465B;
+    border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-button {
+    display: none !important;
+}
+
+
+.profile-button {
+    background-color: #4CAF50;
+    /* Green background */
+    color: white;
+    /* White text */
+    border: 2px solid #388E3C;
+    /* Darker green border */
+    border-radius: 8px;
+    /* Rounded corners */
+    padding: 10px 20px;
+    /* Padding for better size */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    font-size: 16px;
+    /* Font size */
+}
+
+.profile-button:hover {
+    background-color: #45a049;
+}
+.back-button {
+    display: block;
+    width: 250px;
+    /* Adjust width as needed */
+    margin: 20px auto;
+    /* Centers horizontally with top and bottom margin */
+    padding: 10px 15px;
+    background-color: #39FF14;
+    /* Assuming a bright green */
+    color: black;
+    /* Assuming black text for contrast */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    /* To remove default link styling if used as an <a> tag */
+}
+
+.back-button:hover {
+    background-color: #5CFF47;
+    /* A slightly lighter green on hover */
+}
+
+

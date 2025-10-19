@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Reset default spacing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: whitesmoke;
+            background: linear-gradient(180deg, #000000, #002B36) no-repeat;
+            font-family: "Roboto Condensed", sans-serif;
+        }
+
+        .custom-body {
+            min-height: 100vh;
+        }
+
+        /* Page wrapper handles shift */
+        #page-wrapper {
+            transition: transform 0.4s ease;
+        }
+
+        #page-wrapper.shifted {
+            transform: translateX(300px);
+        }
+
+        .custom-navbar {
+            position: fixed;
+            background-color: #003B46 !important;
+            opacity: 0.95;
+            padding: 10px 20px;
+            border-bottom: 3px solid #00FFFF;
+            box-shadow: 0px 5px 15px rgba(0, 255, 255, 0.3);
+            z-index: 1000;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .menu-btn {
+            font-size: 28px;
+            background: none;
+            border: none;
+            color: #00FFFF;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            margin-right: 20px;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.1);
+        }
+
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 300px;
+            background-color: #003B46;
+            border-right: 3px solid #00FFFF;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-shadow: 5px 0 15px rgba(0, 255, 255, 0.2);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+            z-index: 1001;
+        }
+
+        #sidebar.show {
+            transform: translateX(0);
+        }
+
+        #main-content {
+            padding-top: 120px;
+            transition: margin-left 0.4s ease;
+        }
+
+        .close-btn {
+            align-self: flex-end;
+            background: none;
+            border: none;
+            color: #00FFFF;
+            font-size: 24px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .close-btn:hover {
+            border-color: #F2EEAE;
+            background-color: #008B8B;
+            box-shadow: 0px 0px 10px 3px #00FFFF;
+            transform: translateY(-0.3rem);
+        }
+
+        .sidebar-btn {
+            font-size: 16px;
+            padding: 10px 15px;
+            text-align: left;
+            color: white;
+            background-color: transparent;
+            border: 1px solid #00FFFF;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-btn:hover {
+            background-color: #014f5b;
+            transform: translateX(3px);
+        }
+
+        .btn-primary {
+            background-color: transparent;
+            border: 1px solid #00FFFF;
+            color: white;
+            padding: 0.75em 1.5em;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #014f5b;
+            box-shadow: 0 0 10px 3px #00FFFF;
+            transform: translateY(-0.3rem);
+        }
+
+        .btn-primary:active {
+            background-color: #014f5b !important;
+        }
+
+        /* --- Button shadow matches border color --- */
+        button,
+        .btn,
+        .btn-primary,
+        .btn-outline-success {
+            --btn-border: #00CED1;
+        }
+
+        .btn-primary[style*="border-color: pink"]:hover,
+        .sidebar-btn[style*="border-color: pink"]:hover {
+            box-shadow: 0 0 10px 3px pink;
+        }
+
+        .btn-primary[style*="border-color: red"]:hover,
+        .sidebar-btn[style*="border-color: red"]:hover {
+            box-shadow: 0 0 10px 3px red;
+        }
+
+        .btn-primary[style*="border-color: yellow"]:hover,
+        .sidebar-btn[style*="border-color: yellow"]:hover {
+            box-shadow: 0 0 10px 3px yellow;
+        }
+
+        .btn-primary[style*="border-color: #00FFFF"]:hover,
+        .sidebar-btn[style*="border-color: #00FFFF"]:hover {
+            box-shadow: 0 0 10px 3px #00FFFF;
+        }
+
+        /* fallback for default */
+        .btn-primary:hover,
+        .sidebar-btn:hover {
+            box-shadow: 0 0 10px 3px #00CED1;
+        }
+
+        .logo {
+            display: block;
+            margin: 20px auto;
+            width: 200px;
+            height: 200px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding-bottom: 40px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin: 40px 0;
+            background-color: #002B36;
+            color: white;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #00CED1;
+            text-align: center;
+        }
+
+        th {
+            background-color: #004f5a;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #001f28;
+        }
+
+        tr:hover {
+            background-color: #014f5b;
+        }
+
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 10px;
+            max-width: 900px;
+            height: 500px;
+            padding: 30px;
+        }
+
+        .flag {
+            width: 24px;
+            height: 18px;
+        }
+
+        .brand-title {
+            font-size: 28px;
+            color: #39FF14;
+            margin: 0;
+            margin-right: 5px;
+            display: inline-block;
+        }
+
+        .brand-highlight {
+            color: #00FFFF;
+        }
+
+        .logout-btn {
+            font-size: 16px;
+            padding: 10px 15px;
+            text-align: left;
+            color: red;
+            background-color: transparent;
+            border: 2px solid red;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-top: auto;
+        }
+
+        .logout-btn:hover {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="custom-body">
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <button class="close-btn" onclick="toggleSidebar()">✖</button>
+        <button onclick="location.href='dashboard.html'" class="sidebar-btn btn-primary"
+            style="border-color: #00FFFF;">📊 Dashboard</button>
+        <button onclick="location.href='admin2.html'" class="sidebar-btn btn-primary" style="border-color: pink;">👤
+            Admins</button>
+        <button onclick="location.href='doctor.html'" class="sidebar-btn btn-primary" style="border-color: red;">🩺
+            Doctors</button>
+        <button onclick="location.href='patient.html'" class="sidebar-btn btn-primary"
+            style="border-color: yellow;">🧑‍🤝‍🧑 Patients</button>
+        <button class="logout-btn" style="background-color: transparent; color: red; border-color: red;">🔴
+            Logout</button>
+    </div>
+
+    <!-- Everything that shifts -->
+    <div id="page-wrapper">
+        <nav class="navbar custom-navbar">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+                    <a class="navbar-brand" href="#">
+                        <h1 class="brand-title">Versa<span class="brand-highlight">Life</span></h1>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <div id="main-content">
+            <img src="logo.svg" alt="VersaLife Logo" class="logo" />
+            <div class="container">
+                <h2>Admin Dashboard</h2>
+                <table>
+                    <tr>
+                        <th colspan="2">User Counts</th>
+                    </tr>
+                    <tr>
+                        <td>Admins</td>
+                        <td id="adminCount">3</td>
+                    </tr>
+                    <tr>
+                        <td>Doctors</td>
+                        <td id="doctorCount">10</td>
+                    </tr>
+                    <tr>
+                        <td>Patients</td>
+                        <td id="patientCount">50</td>
+                    </tr>
+                </table>
+
+                <table>
+                    <tr>
+                        <th colspan="3">Device Usage</th>
+                    </tr>
+                    <tr>
+                        <th>Device</th>
+                        <th>Percentage</th>
+                        <th>Users</th>
+                    </tr>
+                    <tbody id="deviceTable"></tbody>
+                </table>
+
+                <table>
+                    <tr>
+                        <th colspan="3">Country Usage</th>
+                    </tr>
+                    <tr>
+                        <th>Country</th>
+                        <th>Flag</th>
+                        <th>Users</th>
+                    </tr>
+                    <tbody id="countryTable"></tbody>
+                </table>
+
+                <h2>Average Usage Time (minutes)</h2>
+                <canvas id="timeChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Sidebar function
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            const pageWrapper = document.getElementById("page-wrapper");
+            sidebar.classList.toggle("show");
+            pageWrapper.classList.toggle("shifted");
+        }
+
+        // Device type detection
+        function detectDevice() {
+            const ua = navigator.userAgent;
+            if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+                return "Tablet";
+            }
+            if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
+                return "Mobile";
+            }
+            return "Desktop";
+        }
+
+        // Function to fetch country and device info
+        function fetchData() {
+            // First try ipapi.co
+            fetch("https://ipapi.co/json/")
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    if (!data || !data.country_name) {
+                        throw new Error('Invalid data received');
+                    }
+                    const country = data.country_name;
+                    const code = data.country_code.toLowerCase();
+                    const deviceType = detectDevice();
+
+                    // Update the Country table
+                    const countryTable = document.getElementById("countryTable");
+                    countryTable.innerHTML = `<tr><td>${country}</td><td><img class="flag" src="https://flagcdn.com/24x18/${code}.png"></td><td>1</td></tr>`;
+
+                    // Update the Device table
+                    const deviceTable = document.getElementById("deviceTable");
+                    deviceTable.innerHTML = `<tr><td>${deviceType}</td><td>100%</td><td>1</td></tr>`;
+                })
+                .catch(error => {
+                    console.error('Error with ipapi.co:', error);
+                    // Try backup API
+                    return fetch("https://api.db-ip.com/v2/free/self")
+                        .then(res => res.json())
+                        .then(data => {
+                            const country = data.countryName;
+                            const code = data.countryCode.toLowerCase();
+                            const deviceType = detectDevice();
+
+                            // Update the Country table
+                            const countryTable = document.getElementById("countryTable");
+                            countryTable.innerHTML = `<tr><td>${country}</td><td><img class="flag" src="https://flagcdn.com/24x18/${code}.png"></td><td>1</td></tr>`;
+
+                            // Update the Device table
+                            const deviceTable = document.getElementById("deviceTable");
+                            deviceTable.innerHTML = `<tr><td>${deviceType}</td><td>100%</td><td>1</td></tr>`;
+                        })
+                        .catch(error => {
+                            console.error('Error with backup API:', error);
+                            // Fallback content in case of error
+                            document.getElementById("countryTable").innerHTML = `
+                                <tr>
+                                    <td>Error loading country data</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>`;
+                            document.getElementById("deviceTable").innerHTML = `
+                                <tr>
+                                    <td>${detectDevice()}</td>
+                                    <td>100%</td>
+                                    <td>1</td>
+                                </tr>`;
+                        });
+                });
+        }
+
+        let sessionStart = Date.now();
+
+        window.addEventListener("beforeunload", () => {
+            const sessionEnd = Date.now();
+            const sessionTime = (sessionEnd - sessionStart) / 60000; // in minutes
+
+            let totalTime = parseFloat(localStorage.getItem("totalTime")) || 0;
+            let totalVisits = parseInt(localStorage.getItem("totalVisits")) || 0;
+
+            totalTime += sessionTime;
+            totalVisits += 1;
+
+            localStorage.setItem("totalTime", totalTime.toString());
+            localStorage.setItem("totalVisits", totalVisits.toString());
+        });
+
+        window.addEventListener("load", () => {
+            // Fetch and render the device and country data
+            fetchData();
+
+            const totalTime = parseFloat(localStorage.getItem("totalTime")) || 0;
+            const totalVisits = parseInt(localStorage.getItem("totalVisits")) || 1;
+            const avgTime = (totalTime / totalVisits).toFixed(2);
+
+            const ctx = document.getElementById("timeChart").getContext("2d");
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: ["Average Time"],
+                    datasets: [{
+                        label: "Minutes",
+                        data: [avgTime],
+                        backgroundColor: "#00CED1"
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#000'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#000'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Logout button click event
+        document.querySelector(".logout-btn").addEventListener("click", function () {
+            alert("Logging out...");
+            // You can replace the alert with: window.location.href = 'login.html';
+        });
+    </script>
+
+
+</body>
+
+</html>
